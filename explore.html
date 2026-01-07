@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUNI FSV Thesis Records</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        header {
+            background: #1a365d;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 0;
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            background: white;
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .dataset-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dataset-btn {
+            padding: 10px 20px;
+            border: 2px solid #1a365d;
+            background: white;
+            color: #1a365d;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .dataset-btn.active {
+            background: #1a365d;
+            color: white;
+        }
+
+        .dataset-btn:hover:not(.active) {
+            background: #e8f0fe;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #1a365d;
+        }
+
+        .stats {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 0 0 8px 8px;
+            overflow-x: auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        thead {
+            background: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            padding: 14px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #1a365d;
+            border-bottom: 2px solid #e0e0e0;
+            cursor: pointer;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        th:hover {
+            background: #e8f0fe;
+        }
+
+        th .sort-icon {
+            margin-left: 6px;
+            opacity: 0.4;
+        }
+
+        th.sorted-asc .sort-icon::after {
+            content: '▲';
+            opacity: 1;
+        }
+
+        th.sorted-desc .sort-icon::after {
+            content: '▼';
+            opacity: 1;
+        }
+
+        th:not(.sorted-asc):not(.sorted-desc) .sort-icon::after {
+            content: '⇅';
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .col-title {
+            min-width: 250px;
+            max-width: 350px;
+        }
+
+        .col-author {
+            min-width: 120px;
+        }
+
+        .col-supervisor {
+            min-width: 120px;
+        }
+
+        .col-year {
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .col-institute {
+            min-width: 150px;
+        }
+
+        .col-abstract {
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .col-link {
+            min-width: 80px;
+        }
+
+        .abstract-cell {
+            position: relative;
+        }
+
+        .abstract-text {
+            max-height: 80px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            line-height: 1.5;
+        }
+
+        .abstract-text.expanded {
+            max-height: none;
+        }
+
+        .expand-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 8px;
+            padding: 4px 10px;
+            background: #e8f0fe;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: #1a365d;
+            transition: background 0.2s;
+        }
+
+        .expand-btn:hover {
+            background: #d0e0fc;
+        }
+
+        .expand-btn .arrow {
+            transition: transform 0.2s;
+        }
+
+        .expand-btn.expanded .arrow {
+            transform: rotate(180deg);
+        }
+
+        .title-link {
+            color: #1a365d;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .title-link:hover {
+            text-decoration: underline;
+        }
+
+        .secondary-title {
+            font-size: 0.85rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 4px;
+        }
+
+        .subjects {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .subject-tag {
+            background: #e8f0fe;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: #1a365d;
+        }
+
+        .link-btn {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #1a365d;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            transition: background 0.2s;
+        }
+
+        .link-btn:hover {
+            background: #2d4a7c;
+        }
+
+        .no-results {
+            padding: 40px;
+            text-align: center;
+            color: #666;
+        }
+
+        .loading {
+            padding: 60px;
+            text-align: center;
+            color: #666;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #1a365d;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error {
+            padding: 40px;
+            text-align: center;
+            color: #c53030;
+            background: #fff5f5;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            header {
+                padding: 15px;
+            }
+
+            header h1 {
+                font-size: 1.4rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .dataset-selector {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>CUNI Faculty of Social Sciences — Thesis Records</h1>
+            <div class="header-meta">
+                <span id="harvest-date">Harvested: —</span>
+                <span id="total-records">Total Records: —</span>
+                <span>Source: OAI-PMH (dspace.cuni.cz)</span>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="dataset-selector">
+                <button class="dataset-btn active" data-file="records.json">
+                    Institute of Political Studies
+                </button>
+                <button class="dataset-btn" data-file="all_fsv_records.json">
+                    All FSV Records
+                </button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search" placeholder="Search by title, author, supervisor, keywords...">
+            </div>
+            <div class="stats">
+                <span id="showing-count">Showing: —</span>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="records-table">
+                <thead>
+                    <tr>
+                        <th class="col-year" data-sort="year">Year <span class="sort-icon"></span></th>
+                        <th class="col-title" data-sort="title">Title <span class="sort-icon"></span></th>
+                        <th class="col-author" data-sort="author">Author <span class="sort-icon"></span></th>
+                        <th class="col-supervisor" data-sort="supervisor">Supervisor <span class="sort-icon"></span>
+                        </th>
+                        <th class="col-institute" data-sort="institute">Institute <span class="sort-icon"></span></th>
+                        <th class="col-abstract">Abstract</th>
+                        <th class="col-link">Link</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <tr>
+                        <td colspan="7" class="loading">Loading records</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let allRecords = [];
+        let filteredRecords = [];
+        let currentSort = { field: 'year', direction: 'desc' };
+        let currentFile = 'records.json';
+
+        // DOM elements
+        const tableBody = document.getElementById('table-body');
+        const searchInput = document.getElementById('search');
+        const harvestDate = document.getElementById('harvest-date');
+        const totalRecords = document.getElementById('total-records');
+        const showingCount = document.getElementById('showing-count');
+        const datasetBtns = document.querySelectorAll('.dataset-btn');
+
+        // Load data
+        async function loadData(filename) {
+            tableBody.innerHTML = '<tr><td colspan="7" class="loading">Loading records</td></tr>';
+
+            try {
+                const response = await fetch(filename);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                const data = await response.json();
+
+                allRecords = data.records || [];
+
+                // Update header info
+                if (data.metadata) {
+                    harvestDate.textContent = `Harvested: ${new Date(data.metadata.harvest_date).toLocaleDateString()}`;
+                    totalRecords.textContent = `Total Records: ${allRecords.length.toLocaleString()}`;
+                }
+
+                // Initial render
+                filterAndRender();
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+                tableBody.innerHTML = `<tr><td colspan="7" class="error">
+                    Error loading data: ${error.message}<br>
+                    Make sure ${filename} is in the same directory.
+                </td></tr>`;
+            }
+        }
+
+        // Get sortable value from record
+        function getSortValue(record, field) {
+            switch (field) {
+                case 'year':
+                    return record.year || 0;
+                case 'title':
+                    return (record.titles && record.titles[0]) ? record.titles[0].toLowerCase() : '';
+                case 'author':
+                    return (record.creators && record.creators[0]) ? record.creators[0].toLowerCase() : '';
+                case 'supervisor':
+                    return (record.contributors && record.contributors[0]) ? record.contributors[0].toLowerCase() : '';
+                case 'institute':
+                    return (record.institute || '').toLowerCase();
+                default:
+                    return '';
+            }
+        }
+
+        // Filter and sort records
+        function filterAndRender() {
+            const query = searchInput.value.toLowerCase().trim();
+
+            // Filter
+            if (query) {
+                filteredRecords = allRecords.filter(record => {
+                    const searchFields = [
+                        ...(record.titles || []),
+                        ...(record.creators || []),
+                        ...(record.contributors || []),
+                        ...(record.subjects || []),
+                        ...(record.abstracts || []),
+                        record.institute || ''
+                    ].join(' ').toLowerCase();
+
+                    return searchFields.includes(query);
+                });
+            } else {
+                filteredRecords = [...allRecords];
+            }
+
+            // Sort
+            filteredRecords.sort((a, b) => {
+                const aVal = getSortValue(a, currentSort.field);
+                const bVal = getSortValue(b, currentSort.field);
+
+                let comparison = 0;
+                if (typeof aVal === 'number') {
+                    comparison = aVal - bVal;
+                } else {
+                    comparison = aVal.localeCompare(bVal);
+                }
+
+                return currentSort.direction === 'asc' ? comparison : -comparison;
+            });
+
+            // Update count
+            showingCount.textContent = `Showing: ${filteredRecords.length.toLocaleString()} records`;
+
+            // Render
+            renderTable();
+        }
+
+        // Render table
+        function renderTable() {
+            if (filteredRecords.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="7" class="no-results">No records found</td></tr>';
+                return;
+            }
+
+            tableBody.innerHTML = filteredRecords.map((record, idx) => {
+                const title = record.titles && record.titles[0] ? record.titles[0] : '—';
+                const secondTitle = record.titles && record.titles[1] ? record.titles[1] : '';
+                const author = record.creators && record.creators[0] ? record.creators[0] : '—';
+                const supervisor = record.contributors && record.contributors[0] ? record.contributors[0] : '—';
+                const year = record.year || '—';
+                const institute = record.institute || '—';
+                const handleUrl = record.handle_url || '#';
+
+                // Get first abstract (prefer English)
+                let abstract = '—';
+                if (record.abstracts && record.abstracts.length > 0) {
+                    // Try to find English abstract (usually doesn't start with Czech characters)
+                    const englishAbstract = record.abstracts.find(a => /^[A-Z]/.test(a.trim()));
+                    abstract = englishAbstract || record.abstracts[0];
+                }
+
+                // Subjects
+                const subjects = record.subjects || [];
+                const subjectTags = subjects.slice(0, 5).map(s =>
+                    `<span class="subject-tag">${escapeHtml(s)}</span>`
+                ).join('');
+
+                return `
+                    <tr>
+                        <td class="col-year">${year}</td>
+                        <td class="col-title">
+                            <a href="${handleUrl}" target="_blank" class="title-link">${escapeHtml(title)}</a>
+                            ${secondTitle ? `<div class="secondary-title">${escapeHtml(secondTitle)}</div>` : ''}
+                            ${subjectTags ? `<div class="subjects">${subjectTags}</div>` : ''}
+                        </td>
+                        <td class="col-author">${escapeHtml(author)}</td>
+                        <td class="col-supervisor">${escapeHtml(supervisor)}</td>
+                        <td class="col-institute">${escapeHtml(institute)}</td>
+                        <td class="col-abstract">
+                            <div class="abstract-cell">
+                                <div class="abstract-text" id="abstract-${idx}">${escapeHtml(abstract)}</div>
+                                ${abstract.length > 200 ? `
+                                    <button class="expand-btn" onclick="toggleAbstract(${idx})">
+                                        <span class="arrow">▼</span> Expand
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </td>
+                        <td class="col-link">
+                            <a href="${handleUrl}" target="_blank" class="link-btn">View</a>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Toggle abstract expansion
+        function toggleAbstract(idx) {
+            const textEl = document.getElementById(`abstract-${idx}`);
+            const btnEl = textEl.nextElementSibling;
+
+            textEl.classList.toggle('expanded');
+            btnEl.classList.toggle('expanded');
+
+            const isExpanded = textEl.classList.contains('expanded');
+            btnEl.innerHTML = `<span class="arrow">▼</span> ${isExpanded ? 'Collapse' : 'Expand'}`;
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Handle sorting
+        document.querySelectorAll('th[data-sort]').forEach(th => {
+            th.addEventListener('click', () => {
+                const field = th.dataset.sort;
+
+                // Toggle direction if same field
+                if (currentSort.field === field) {
+                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    currentSort.field = field;
+                    currentSort.direction = field === 'year' ? 'desc' : 'asc';
+                }
+
+                // Update header styles
+                document.querySelectorAll('th[data-sort]').forEach(h => {
+                    h.classList.remove('sorted-asc', 'sorted-desc');
+                });
+                th.classList.add(currentSort.direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
+
+                filterAndRender();
+            });
+        });
+
+        // Handle search
+        let searchTimeout;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(filterAndRender, 200);
+        });
+
+        // Handle dataset switching
+        datasetBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                datasetBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFile = btn.dataset.file;
+                loadData(currentFile);
+            });
+        });
+
+        // Make toggleAbstract available globally
+        window.toggleAbstract = toggleAbstract;
+
+        // Initial load
+        loadData(currentFile);
+    </script>
+</body>
+
+</html>
