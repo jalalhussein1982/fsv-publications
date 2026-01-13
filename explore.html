@@ -24,7 +24,7 @@
         }
 
         header {
-            background: #1a365d;
+            background: #8b1a1a;
             color: white;
             padding: 20px 30px;
             border-radius: 8px 8px 0 0;
@@ -61,9 +61,9 @@
 
         .dataset-btn {
             padding: 10px 20px;
-            border: 2px solid #1a365d;
+            border: 2px solid #8b1a1a;
             background: white;
-            color: #1a365d;
+            color: #8b1a1a;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 500;
@@ -71,12 +71,12 @@
         }
 
         .dataset-btn.active {
-            background: #1a365d;
+            background: #8b1a1a;
             color: white;
         }
 
         .dataset-btn:hover:not(.active) {
-            background: #e8f0fe;
+            background: #fee8e8;
         }
 
         .search-box {
@@ -95,7 +95,7 @@
 
         .search-box input:focus {
             outline: none;
-            border-color: #1a365d;
+            border-color: #8b1a1a;
         }
 
         .stats {
@@ -127,7 +127,7 @@
             padding: 14px 12px;
             text-align: left;
             font-weight: 600;
-            color: #1a365d;
+            color: #8b1a1a;
             border-bottom: 2px solid #e0e0e0;
             cursor: pointer;
             white-space: nowrap;
@@ -135,7 +135,7 @@
         }
 
         th:hover {
-            background: #e8f0fe;
+            background: #fee8e8;
         }
 
         th .sort-icon {
@@ -219,17 +219,17 @@
             gap: 4px;
             margin-top: 8px;
             padding: 4px 10px;
-            background: #e8f0fe;
+            background: #fee8e8;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             font-size: 0.8rem;
-            color: #1a365d;
+            color: #8b1a1a;
             transition: background 0.2s;
         }
 
         .expand-btn:hover {
-            background: #d0e0fc;
+            background: #fcd0d0;
         }
 
         .expand-btn .arrow {
@@ -241,7 +241,7 @@
         }
 
         .title-link {
-            color: #1a365d;
+            color: #8b1a1a;
             text-decoration: none;
             font-weight: 500;
         }
@@ -265,17 +265,17 @@
         }
 
         .subject-tag {
-            background: #e8f0fe;
+            background: #fee8e8;
             padding: 2px 8px;
             border-radius: 12px;
             font-size: 0.75rem;
-            color: #1a365d;
+            color: #8b1a1a;
         }
 
         .link-btn {
             display: inline-block;
             padding: 6px 12px;
-            background: #1a365d;
+            background: #8b1a1a;
             color: white;
             text-decoration: none;
             border-radius: 4px;
@@ -284,7 +284,7 @@
         }
 
         .link-btn:hover {
-            background: #2d4a7c;
+            background: #a52a2a;
         }
 
         .no-results {
@@ -304,7 +304,7 @@
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 2px solid #1a365d;
+            border: 2px solid #8b1a1a;
             border-top-color: transparent;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
@@ -323,6 +323,114 @@
             text-align: center;
             color: #c53030;
             background: #fff5f5;
+        }
+
+        /* Progress bar styles */
+        .progress-container {
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            max-width: 400px;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #8b1a1a;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .progress-cached {
+            color: #2e7d32;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+
+        /* Pagination styles */
+        .pagination-container {
+            background: white;
+            padding: 16px 20px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pagination-btn {
+            padding: 8px 14px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            color: #333;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .pagination-btn:hover:not(:disabled) {
+            border-color: #8b1a1a;
+            color: #8b1a1a;
+        }
+
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-btn.active {
+            background: #8b1a1a;
+            color: white;
+            border-color: #8b1a1a;
+        }
+
+        .pagination-info {
+            color: #666;
+            font-size: 0.85rem;
+            margin: 0 12px;
+        }
+
+        .pagination-ellipsis {
+            color: #999;
+            padding: 0 4px;
+        }
+
+        .per-page-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 1px solid #e0e0e0;
+        }
+
+        .per-page-selector label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .per-page-selector select {
+            padding: 6px 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            cursor: pointer;
         }
 
         @media (max-width: 768px) {
@@ -345,6 +453,19 @@
 
             .dataset-selector {
                 justify-content: center;
+            }
+
+            .pagination-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .per-page-selector {
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+                padding-top: 12px;
+                border-top: 1px solid #e0e0e0;
             }
         }
     </style>
@@ -402,6 +523,21 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="pagination-container" id="pagination" style="display: none;">
+            <button class="pagination-btn" id="prev-btn" disabled>← Previous</button>
+            <div id="page-numbers"></div>
+            <button class="pagination-btn" id="next-btn">Next →</button>
+            <span class="pagination-info" id="page-info"></span>
+            <div class="per-page-selector">
+                <label for="per-page">Per page:</label>
+                <select id="per-page">
+                    <option value="25">25</option>
+                    <option value="50" selected>50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -410,6 +546,8 @@
         let filteredRecords = [];
         let currentSort = { field: 'year', direction: 'desc' };
         let currentFile = 'records.json';
+        let currentPage = 1;
+        let recordsPerPage = 50;
 
         // DOM elements
         const tableBody = document.getElementById('table-body');
@@ -418,16 +556,142 @@
         const totalRecords = document.getElementById('total-records');
         const showingCount = document.getElementById('showing-count');
         const datasetBtns = document.querySelectorAll('.dataset-btn');
+        const paginationContainer = document.getElementById('pagination');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const pageNumbers = document.getElementById('page-numbers');
+        const pageInfo = document.getElementById('page-info');
+        const perPageSelect = document.getElementById('per-page');
 
-        // Load data
+        // ============ IndexedDB Cache ============
+        const DB_NAME = 'FSVRecordsCache';
+        const DB_VERSION = 1;
+        const STORE_NAME = 'datasets';
+
+        function openDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                request.onerror = () => reject(request.error);
+                request.onsuccess = () => resolve(request.result);
+                request.onupgradeneeded = (e) => {
+                    const db = e.target.result;
+                    if (!db.objectStoreNames.contains(STORE_NAME)) {
+                        db.createObjectStore(STORE_NAME, { keyPath: 'filename' });
+                    }
+                };
+            });
+        }
+
+        async function getCachedData(filename) {
+            try {
+                const db = await openDB();
+                return new Promise((resolve, reject) => {
+                    const tx = db.transaction(STORE_NAME, 'readonly');
+                    const store = tx.objectStore(STORE_NAME);
+                    const request = store.get(filename);
+                    request.onsuccess = () => resolve(request.result);
+                    request.onerror = () => reject(request.error);
+                });
+            } catch (e) {
+                console.warn('IndexedDB not available:', e);
+                return null;
+            }
+        }
+
+        async function setCachedData(filename, data) {
+            try {
+                const db = await openDB();
+                return new Promise((resolve, reject) => {
+                    const tx = db.transaction(STORE_NAME, 'readwrite');
+                    const store = tx.objectStore(STORE_NAME);
+                    const request = store.put({ filename, data, cachedAt: Date.now() });
+                    request.onsuccess = () => resolve();
+                    request.onerror = () => reject(request.error);
+                });
+            } catch (e) {
+                console.warn('Failed to cache data:', e);
+            }
+        }
+
+        // ============ Progress Loading ============
+        function showProgress(message, percent = 0, cached = false) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="7">
+                        <div class="progress-container">
+                            <div>${message}</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${percent}%"></div>
+                            </div>
+                            <div class="progress-text">${percent < 100 ? `${percent.toFixed(0)}%` : 'Processing...'}</div>
+                            ${cached ? '<div class="progress-cached">✓ Loading from cache (instant)</div>' : ''}
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }
+
+        async function fetchWithProgress(url) {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+            const contentLength = response.headers.get('content-length');
+            if (!contentLength) {
+                // No content-length header, fall back to regular fetch
+                showProgress('Downloading...', 50);
+                const data = await response.json();
+                return data;
+            }
+
+            const total = parseInt(contentLength, 10);
+            let loaded = 0;
+            const reader = response.body.getReader();
+            const chunks = [];
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                chunks.push(value);
+                loaded += value.length;
+                const percent = (loaded / total) * 100;
+                showProgress(`Downloading ${(loaded / 1024 / 1024).toFixed(1)} MB / ${(total / 1024 / 1024).toFixed(1)} MB`, percent);
+            }
+
+            showProgress('Parsing data...', 100);
+
+            // Combine chunks and decode
+            const allChunks = new Uint8Array(loaded);
+            let position = 0;
+            for (const chunk of chunks) {
+                allChunks.set(chunk, position);
+                position += chunk.length;
+            }
+
+            const text = new TextDecoder().decode(allChunks);
+            return JSON.parse(text);
+        }
+
+        // ============ Load Data ============
         async function loadData(filename) {
-            tableBody.innerHTML = '<tr><td colspan="7" class="loading">Loading records</td></tr>';
+            paginationContainer.style.display = 'none';
+            currentPage = 1;
 
             try {
-                const response = await fetch(filename);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                // Check cache first
+                const cached = await getCachedData(filename);
+                let data;
 
-                const data = await response.json();
+                if (cached) {
+                    showProgress('Loading from cache...', 100, true);
+                    data = cached.data;
+                    // Small delay to show cache message
+                    await new Promise(r => setTimeout(r, 300));
+                } else {
+                    showProgress('Starting download...', 0);
+                    data = await fetchWithProgress(filename);
+                    // Cache for next time
+                    await setCachedData(filename, data);
+                }
 
                 allRecords = data.records || [];
 
@@ -449,7 +713,7 @@
             }
         }
 
-        // Get sortable value from record
+        // ============ Sorting ============
         function getSortValue(record, field) {
             switch (field) {
                 case 'year':
@@ -467,7 +731,7 @@
             }
         }
 
-        // Filter and sort records
+        // ============ Filter and Render ============
         function filterAndRender() {
             const query = searchInput.value.toLowerCase().trim();
 
@@ -485,6 +749,8 @@
 
                     return searchFields.includes(query);
                 });
+                // Reset to page 1 when searching
+                currentPage = 1;
             } else {
                 filteredRecords = [...allRecords];
             }
@@ -504,21 +770,106 @@
                 return currentSort.direction === 'asc' ? comparison : -comparison;
             });
 
-            // Update count
-            showingCount.textContent = `Showing: ${filteredRecords.length.toLocaleString()} records`;
-
             // Render
             renderTable();
+            renderPagination();
         }
 
-        // Render table
+        // ============ Pagination ============
+        function getTotalPages() {
+            return Math.ceil(filteredRecords.length / recordsPerPage);
+        }
+
+        function getCurrentPageRecords() {
+            const start = (currentPage - 1) * recordsPerPage;
+            const end = start + recordsPerPage;
+            return filteredRecords.slice(start, end);
+        }
+
+        function renderPagination() {
+            const totalPages = getTotalPages();
+            const totalFiltered = filteredRecords.length;
+            const start = (currentPage - 1) * recordsPerPage + 1;
+            const end = Math.min(currentPage * recordsPerPage, totalFiltered);
+
+            // Update showing count
+            if (totalFiltered === 0) {
+                showingCount.textContent = 'Showing: 0 records';
+            } else {
+                showingCount.textContent = `Showing: ${start}-${end} of ${totalFiltered.toLocaleString()} records`;
+            }
+
+            // Show/hide pagination
+            if (totalFiltered <= recordsPerPage) {
+                paginationContainer.style.display = 'none';
+                return;
+            }
+
+            paginationContainer.style.display = 'flex';
+
+            // Update buttons
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+
+            // Page info
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+
+            // Generate page numbers
+            let pagesHtml = '';
+            const maxVisible = 5;
+
+            if (totalPages <= maxVisible + 2) {
+                // Show all pages
+                for (let i = 1; i <= totalPages; i++) {
+                    pagesHtml += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+                }
+            } else {
+                // Show first, last, and range around current
+                const rangeStart = Math.max(2, currentPage - 1);
+                const rangeEnd = Math.min(totalPages - 1, currentPage + 1);
+
+                pagesHtml += `<button class="pagination-btn ${currentPage === 1 ? 'active' : ''}" data-page="1">1</button>`;
+
+                if (rangeStart > 2) {
+                    pagesHtml += '<span class="pagination-ellipsis">...</span>';
+                }
+
+                for (let i = rangeStart; i <= rangeEnd; i++) {
+                    pagesHtml += `<button class="pagination-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+                }
+
+                if (rangeEnd < totalPages - 1) {
+                    pagesHtml += '<span class="pagination-ellipsis">...</span>';
+                }
+
+                pagesHtml += `<button class="pagination-btn ${currentPage === totalPages ? 'active' : ''}" data-page="${totalPages}">${totalPages}</button>`;
+            }
+
+            pageNumbers.innerHTML = pagesHtml;
+
+            // Add click handlers to page numbers
+            pageNumbers.querySelectorAll('button').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentPage = parseInt(btn.dataset.page);
+                    renderTable();
+                    renderPagination();
+                    // Scroll to top of table
+                    document.querySelector('.table-container').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        }
+
+        // ============ Render Table ============
         function renderTable() {
-            if (filteredRecords.length === 0) {
+            const pageRecords = getCurrentPageRecords();
+
+            if (pageRecords.length === 0) {
                 tableBody.innerHTML = '<tr><td colspan="7" class="no-results">No records found</td></tr>';
                 return;
             }
 
-            tableBody.innerHTML = filteredRecords.map((record, idx) => {
+            tableBody.innerHTML = pageRecords.map((record, idx) => {
+                const globalIdx = (currentPage - 1) * recordsPerPage + idx;
                 const title = record.titles && record.titles[0] ? record.titles[0] : '—';
                 const secondTitle = record.titles && record.titles[1] ? record.titles[1] : '';
                 const author = record.creators && record.creators[0] ? record.creators[0] : '—';
@@ -530,7 +881,6 @@
                 // Get first abstract (prefer English)
                 let abstract = '—';
                 if (record.abstracts && record.abstracts.length > 0) {
-                    // Try to find English abstract (usually doesn't start with Czech characters)
                     const englishAbstract = record.abstracts.find(a => /^[A-Z]/.test(a.trim()));
                     abstract = englishAbstract || record.abstracts[0];
                 }
@@ -554,9 +904,9 @@
                         <td class="col-institute">${escapeHtml(institute)}</td>
                         <td class="col-abstract">
                             <div class="abstract-cell">
-                                <div class="abstract-text" id="abstract-${idx}">${escapeHtml(abstract)}</div>
+                                <div class="abstract-text" id="abstract-${globalIdx}">${escapeHtml(abstract)}</div>
                                 ${abstract.length > 200 ? `
-                                    <button class="expand-btn" onclick="toggleAbstract(${idx})">
+                                    <button class="expand-btn" onclick="toggleAbstract(${globalIdx})">
                                         <span class="arrow">▼</span> Expand
                                     </button>
                                 ` : ''}
@@ -570,7 +920,7 @@
             }).join('');
         }
 
-        // Toggle abstract expansion
+        // ============ Utilities ============
         function toggleAbstract(idx) {
             const textEl = document.getElementById(`abstract-${idx}`);
             const btnEl = textEl.nextElementSibling;
@@ -582,7 +932,6 @@
             btnEl.innerHTML = `<span class="arrow">▼</span> ${isExpanded ? 'Collapse' : 'Expand'}`;
         }
 
-        // Escape HTML
         function escapeHtml(text) {
             if (!text) return '';
             const div = document.createElement('div');
@@ -590,12 +939,13 @@
             return div.innerHTML;
         }
 
-        // Handle sorting
+        // ============ Event Handlers ============
+
+        // Sorting
         document.querySelectorAll('th[data-sort]').forEach(th => {
             th.addEventListener('click', () => {
                 const field = th.dataset.sort;
 
-                // Toggle direction if same field
                 if (currentSort.field === field) {
                     currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
                 } else {
@@ -603,24 +953,24 @@
                     currentSort.direction = field === 'year' ? 'desc' : 'asc';
                 }
 
-                // Update header styles
                 document.querySelectorAll('th[data-sort]').forEach(h => {
                     h.classList.remove('sorted-asc', 'sorted-desc');
                 });
                 th.classList.add(currentSort.direction === 'asc' ? 'sorted-asc' : 'sorted-desc');
 
+                currentPage = 1;
                 filterAndRender();
             });
         });
 
-        // Handle search
+        // Search
         let searchTimeout;
         searchInput.addEventListener('input', () => {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(filterAndRender, 200);
         });
 
-        // Handle dataset switching
+        // Dataset switching
         datasetBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 datasetBtns.forEach(b => b.classList.remove('active'));
@@ -628,6 +978,33 @@
                 currentFile = btn.dataset.file;
                 loadData(currentFile);
             });
+        });
+
+        // Pagination buttons
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+                renderPagination();
+                document.querySelector('.table-container').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentPage < getTotalPages()) {
+                currentPage++;
+                renderTable();
+                renderPagination();
+                document.querySelector('.table-container').scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Per page selector
+        perPageSelect.addEventListener('change', () => {
+            recordsPerPage = parseInt(perPageSelect.value);
+            currentPage = 1;
+            renderTable();
+            renderPagination();
         });
 
         // Make toggleAbstract available globally
